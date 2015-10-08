@@ -1,0 +1,68 @@
+body {
+	font-family: Verdana, Tahoma, "sans-serif";
+	color: #e4e4e4;
+	background-color: #800000;
+	text-align: left;
+	background-image: url("resume_icon.png");
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-attachment: fixed;
+}
+
+h1 {
+	font-size: 3em;
+	text-shadow: 2px 2px black;
+}
+
+blockquote {
+ 	font-size: 80%;
+}
+
+dt {
+	font-weight: bold;
+}
+
+p:first-letter {
+	font-size: 150%;
+	font-weight: bold;
+}
+
+a {
+	color: #FF8484;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #D678FF;
+	text-decoration: underline;
+}
+
+h1,h2 {
+	color: #9197FF;
+}
+
+strong, em {
+	color: #3BE691;
+}
+
+table,th,tr,td {
+	border: dashed;
+	border-collapse: collapse;
+}
+
+tr:nth-child(2){
+	background-color: blue;
+}
+
+ol {
+	list-style-type: upper-roman;
+}
+
+img {
+	border: 5px dotted;
+	border-color: #797979;
+}
+
+.val{
+	border: none;
+}
