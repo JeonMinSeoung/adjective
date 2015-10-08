@@ -1,0 +1,80 @@
+body {
+	font-family: Arial, Georgia, "sans-serif";
+	color: #8ED4E6;
+	background-color: #4051B5;
+	text-align: left;
+	background-image: url("cse326bg.png");
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-attachment: fixed;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	font-size: 1.8em;
+}
+
+dt {
+	font-weight: bold;
+}
+
+dl {
+	font-size: 75%;
+	color: #FDFD1B;
+}
+
+p:first-letter {
+	font-size: 150%;
+	font-weight: bold;
+}
+
+ins {
+	color: #10FF10;
+	text-decoration: none;
+}
+
+del {
+	color: #ff3636;
+}
+
+ins:hover {
+	font-weight: bold;
+}
+
+h1,h2 {
+	color: #91D8C2;
+}
+
+strong {
+	text-shadow: -2px 2px #ACACAC;
+}
+
+table,th,tr,td {
+	border: solid;
+	border-collapse: collapse;
+}
+
+tr:last-child {
+	background-color: white;
+}
+
+caption {
+	text-align: right;
+}
+
+ol {
+	list-style-type: lower-greek;
+}
+
+img {
+	width: 300px;
+	height: 300px;
+}
+
+a img {
+	width: auto;
+	height: auto;
+}
