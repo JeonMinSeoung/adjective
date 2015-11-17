@@ -12,14 +12,17 @@ window.onload = function () {
             var value = $(this).innerHTML;
             
             if( exp[exp.length-1]==="=" && value!=="AC" ){
-                stack = [];
-                exp = value;
-                displayVal = value;
-                if(value==="("){
-                    start = 1;   // start ON
-                    stack.push(value);
-                    displayVal = "0";
+                if( /\)|\/|\*|\-|\+|\=|\./g.test(value) ) alert("Please enter the equation properly.");
+                else{
+                    stack = [];
                     exp = value;
+                    displayVal = value;
+                    if(value==="("){
+                        start = 1;   // start ON
+                        stack.push(value);
+                        displayVal = "0";
+                        exp = value;
+                    }    
                 }
             }
             else if( exp[exp.length-1]==="=" && value==="AC" ){
@@ -36,9 +39,7 @@ window.onload = function () {
                 else if( (stack[stack.length-1]===")") && (exp[exp.length-1]===")") ) ;
                 else stack.push(parseFloat(displayVal));
                 exp += value;
-                if(isValidExpression(stack)){
-                    displayVal = postfixCalculate(infixToPostfix(stack));
-                }
+                if(isValidExpression(stack)) displayVal = postfixCalculate(infixToPostfix(stack));
                 else{
                     alert("Please enter the equation properly.");
                     stack = [];
@@ -73,14 +74,28 @@ window.onload = function () {
                     displayVal = "0";
                 }
                 else if( (/[0-9]/g.test(displayVal)) && (stack[stack.length-1]===")") ){
-                    if( exp[exp.length-1]===")" ) ;    // exp[exp.length-1] == end of bracket
+                    if( exp[exp.length-1]===")" ){               // exp[exp.length-1] == end of bracket
+                        stack.push(value);
+                        exp += value;
+                        displayVal = "0";
+                    }  
                     else if( /[0-9]/g.test(exp[exp.length-1]) ){ // exp[exp.length-1] == number
-                        stack.push("*");
-                        stack.push(parseFloat(displayVal));
+                        if( /0/g.test(exp[exp.length-1]) ){      // exp[exp.length-1] == number, but number "0" next to end of bracket
+                            alert("Please enter the equation properly.");
+                        }
+                        else{
+                            stack.push("*");
+                            stack.push(parseFloat(displayVal));
+                            stack.push(value);
+                            exp += value;
+                            displayVal = "0";
+                        }
                     }
-                    stack.push(value);
-                    exp += value;
-                    displayVal = "0";
+                    else{
+                        stack.push(value);
+                        exp += value;
+                        displayVal = "0";
+                    }
                 }
                 else{
                     exp += value;
@@ -94,11 +109,14 @@ window.onload = function () {
                     exp = value;  
                 } 
                 else if( (value === "(") && (/[0-9]/g.test(exp[exp.length-1])) && (start===1) ){
-                    stack.push(parseFloat(displayVal));
-                    stack.push("*");
-                    displayVal = "0";
-                    stack.push(value);
-                    exp += value;
+                    if( /0/g.test(exp[exp.length-1]) ) alert("Please enter the equation properly.");
+                    else{
+                        stack.push(parseFloat(displayVal));
+                        stack.push("*");
+                        displayVal = "0";
+                        stack.push(value);
+                        exp += value;
+                    }
                 }
                 else if( (value === "(") && (/\+|\-|\*|\//g.test(exp[exp.length-1])) ){
                     stack.push(value);
@@ -113,13 +131,17 @@ window.onload = function () {
             }
             else{       // value == number
                 if(start===0) start=1;
-                if( exp==="0" && displayVal==="0" ){
+                if( (exp==="0") && (displayVal==="0") ){
                     exp = value;
                     displayVal = value;
-                    
                 }
-                else if( exp!=="0" && displayVal==="0" )
+                else if( (exp!=="0") && (displayVal==="0") && !(/\)/g.test(exp[exp.length-1])) )
                 {
+                    exp += value;
+                    displayVal = value;
+                }
+                else if( (/\)/g.test(exp[exp.length-1])) && (value==="0") ) alert("Please enter the equation properly.");
+                else if( (/\)/g.test(exp[exp.length-1])) && (/[0-9]/g.test(value)) ){
                     exp += value;
                     displayVal = value;
                 }
